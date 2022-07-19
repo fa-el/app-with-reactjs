@@ -9,7 +9,7 @@ export default function LoginLayout ({children, title="Login Sampingan"}) {
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <main className={'bg-gray-800 flex flex-column justify-center items-center min-h-screen'}>
+    <main className={'bg-gray-800 flex flex-column justify-center items-center min-h-screen min-w-fit'}>
       {children}
     </main>
 

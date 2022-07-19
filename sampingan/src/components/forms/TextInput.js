@@ -1,34 +1,38 @@
-export default function TextInput ({name='', label='', type = 'text', id='', className='', isValid=true, requiredMessage=null, ...props}) {
-    function ErrorInput () {
-        return <input
-            type={type}
-            name={name}
-            className="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-            id={id}
-            aria-invalid="true"
-            aria-describedby={`${id}-error`}
-            {...props}
-        />
+import React, {useEffect, useState} from 'react';
+export default function TextInput ({name='', label='', type = 'text', id='', onChange=()=>{}, value="", className='', errMsg=null, ...props}) {
+
+    const [classname, setclassname] = useState('shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md text-gray-700')
+    useEffect(() => {
+        if(errMsg){ 
+            setclassname('block w-full border-red-300 text-red-900 placeholder-red-500 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md ' + className);
+        }else{
+            setclassname('shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md text-gray-700 ' + className);
+        }
+    },[errMsg]);
+
+    const handleChange = (e) => {
+        onChange(e);
     }
-    function DefaultInput () {
-        return <input
-            type={type}
-            name={name}
-            id={id}
-            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-            {...props}
-        />
-    }
-    return <div className="mb-3">
+    return <div className="mb-3 w-full">
         <label htmlFor="email" className="block text-sm font-medium">
         {label}
         </label>
         <div className="mt-1 relative rounded-md shadow-sm">
-            {isValid ? <DefaultInput/> : <ErrorInput/>}
+            <input
+                type={type}
+                name={name}
+                className={classname}
+                id={id}
+                aria-invalid={errMsg}
+                aria-describedby={`${id}-error`}
+                onChange={handleChange}
+                value={value}
+                {...props}
+            />
         </div>
 
-        {!isValid && requiredMessage && <p className="mt-2 text-sm text-red-600" id={`${id}-error`}>
-        Your password must be less than 4 characters.
+        {errMsg && <p className="mt-2 text-sm text-red-400 text-right" id={`${id}-error`}>
+        {errMsg}
         </p>}
     </div>
 }

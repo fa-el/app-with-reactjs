@@ -4,13 +4,13 @@ import BaseLayout from '../components/layouts/BaseLayout'
 import styles from '../styles/Home.module.css'
 
 
-export default function Home() {
+function Home() {
   const router = useRouter();
   const [isLogin, setisLogin] = useState(false);
   useEffect(() => {
-    if(!isLogin){
-      router.replace('/login', 'login');
-    }
+    // if(!isLogin){
+    //   router.replace('/login', 'login');
+    // }
     return () => {
       // cleanup
     };
@@ -22,3 +22,14 @@ export default function Home() {
     </BaseLayout>
   )
 }
+
+export async function getServerSideProps() {
+  console.log('props are called here');
+  return {
+    props: {
+      data: 'isempty'
+    }
+  }
+}
+
+export default Home
