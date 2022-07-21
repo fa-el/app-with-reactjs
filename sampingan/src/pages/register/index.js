@@ -73,11 +73,7 @@ export default function Register () {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!validate()){
-      return false;
-    }
-    // Do the regis 
-    router.replace('/')
+    if(validate()) router.replace('/');
   }
 
   return <LoginLayout title="Daftar Sampingan">

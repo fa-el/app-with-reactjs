@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Router, { useRouter } from 'next/router';
 import Button from "../../components/forms/Button";
 import TextInput from "../../components/forms/TextInput";
 import LoginLayout from "../../components/layouts/LoginLayout";
@@ -6,12 +7,14 @@ import Link from 'next/link';
 
 export default function Login () {
 
+    const router = useRouter();
+
     const [loginData, setloginData] = useState({
         nohp: '',
         password: ''
     });
     
-    const [errorMsg, seterrorMsg] = useState(null)
+    const [errorMsg, seterrorMsg] = useState(null);
 
     const handleChangeForm =  (e) => {
         e.preventDefault();
@@ -38,7 +41,7 @@ export default function Login () {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(!checkError()) {
-
+            router.replace('/');
         }
     }
 

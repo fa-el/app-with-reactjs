@@ -21,8 +21,8 @@ export default function Header () {
     height: 64
   }}>
     <div className="relative w-full mx-2 px-2 flex flex-row items-center justify-between">
-      <h1 className="mr-auto text-lg font-bold">SAMPINGAN</h1>
-      <div className="hidden flex-row items-center lg:flex">
+      <h1 className="text-lg font-bold">SAMPINGAN</h1>
+      <div className="ml-auto hidden flex-row items-center lg:flex">
         {menus.map((v,i) => <Link key={i} href={v.link}>
           <div className='mx-2 p-3 cursor-pointer hover:bg-gray-700 rounded-md'>{v.name}</div>
         </Link>)}
